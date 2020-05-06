@@ -14,11 +14,20 @@ public class ReqRes implements ReqResInterface {
 		System.out.println("sendjson");
 
 		OkHttpClient client = new OkHttpClient().newBuilder().build();
-		MediaType mediaType = MediaType.parse("application/json,application/json");
-		RequestBody body = RequestBody.create(mediaType, "{\n\t\"name\" : \"morpheu\",\n\t\"job\" : \"leader\",\n}");
-		Request request = new Request.Builder().url("https://reqres.in/api/users/").method("POST", body)
-				.addHeader("Content-Type", "application/json").addHeader("Content-Type", "application/json")
-				.addHeader("Cookie", "__cfduid=d9c539dffed97714f815f403e49dab5681588643565").build();
+		
+		MediaType mediaType = MediaType.parse("application/json,application/json"); // json or x-www-form-urlencoded
+		
+//		parameters
+		RequestBody body = RequestBody.create(mediaType, "{\n\t\"name\" : \"morpheu\",\n\t\"job\" : \"leader\" \n}");
+		
+		Request request = new Request.Builder()
+				.url("https://reqres.in/api/users/") // api url
+				.method("POST", body)                // POST or GET 
+				.addHeader("Content-Type", "application/json") // json or x-www-form-urlencoded
+				.addHeader("Content-Type", "application/json")
+				.addHeader("Cookie", "__cfduid=d9c539dffed97714f815f403e49dab5681588643565")
+				.build();
+
 		try {
 			Response response = client.newCall(request).execute();
 		} catch (IOException e) {
@@ -31,12 +40,20 @@ public class ReqRes implements ReqResInterface {
 		System.out.println("sendurlencoded");
 
 		OkHttpClient client = new OkHttpClient().newBuilder().build();
+		
 		MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded ,application/x-www-form-urlencoded");
+		
+//		parameters
 		RequestBody body = RequestBody.create(mediaType, "name=morpheu&job=leader");
-		Request request = new Request.Builder().url("https://reqres.in/api/users/").method("POST", body)
+		
+		Request request = new Request.Builder()
+				.url("https://reqres.in/api/users/")
+				.method("POST", body)
 				.addHeader("Content-Type", "application/x-www-form-urlencoded ")
 				.addHeader("Content-Type", "application/x-www-form-urlencoded")
-				.addHeader("Cookie", "__cfduid=d9c539dffed97714f815f403e49dab5681588643565").build();
+				.addHeader("Cookie", "__cfduid=d9c539dffed97714f815f403e49dab5681588643565")
+				.build();
+
 		try {
 			Response response = client.newCall(request).execute();
 		} catch (IOException e) {
