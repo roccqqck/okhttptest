@@ -11,25 +11,27 @@ import okhttp3.Response;
 public class ReqRes implements ReqResInterface {
 
 	public void sendJson() {
-		System.out.println("sendjson");
+		System.out.println("sendjson......");
 
 		OkHttpClient client = new OkHttpClient().newBuilder().build();
 		
 		MediaType mediaType = MediaType.parse("application/json,application/json"); // json or x-www-form-urlencoded
 		
 //		parameters
-		RequestBody body = RequestBody.create(mediaType, "{\n\t\"name\" : \"morpheu\",\n\t\"job\" : \"leader\" \n}");
+		RequestBody body = RequestBody.create(mediaType, "{\"name\" : \"morpheu\",\"job\" : \"leader\" }");
 		
 		Request request = new Request.Builder()
 				.url("https://reqres.in/api/users/") // api url
 				.method("POST", body)                // POST or GET 
 				.addHeader("Content-Type", "application/json") // json or x-www-form-urlencoded
-				.addHeader("Content-Type", "application/json")
+//				.addHeader("Content-Type", "application/json")
 				.addHeader("Cookie", "__cfduid=d9c539dffed97714f815f403e49dab5681588643565")
 				.build();
 
 		try {
-			Response response = client.newCall(request).execute();
+			Response response = client.newCall(request).execute(); //response
+			System.out.println(response);
+			System.out.println(response.body().string()); // print reponse json
 		} catch (IOException e) {
 			System.out.println("catch sendJson ");
 			e.printStackTrace();
@@ -37,7 +39,7 @@ public class ReqRes implements ReqResInterface {
 	}
 
 	public void sendUrlencoded() {
-		System.out.println("sendurlencoded");
+		System.out.println("sendurlencoded......");
 
 		OkHttpClient client = new OkHttpClient().newBuilder().build();
 		
@@ -49,13 +51,15 @@ public class ReqRes implements ReqResInterface {
 		Request request = new Request.Builder()
 				.url("https://reqres.in/api/users/")
 				.method("POST", body)
-				.addHeader("Content-Type", "application/x-www-form-urlencoded ")
 				.addHeader("Content-Type", "application/x-www-form-urlencoded")
+//				.addHeader("Content-Type", "application/x-www-form-urlencoded")
 				.addHeader("Cookie", "__cfduid=d9c539dffed97714f815f403e49dab5681588643565")
 				.build();
 
 		try {
-			Response response = client.newCall(request).execute();
+			Response response = client.newCall(request).execute(); // response
+			System.out.println(response);
+			System.out.println(response.body().string()); // print reponse json
 		} catch (IOException e) {
 			System.out.println("catch sendUrlencoded ");
 			e.printStackTrace();
